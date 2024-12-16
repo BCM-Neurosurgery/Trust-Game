@@ -13,6 +13,13 @@ PARAMETERS = Parameters()
 # Conduct EMU startup operations as needed
 MATENG = ...
 if PARAMETERS.ID['expEnv'] == "BCM-EMU":
+    # import Code.BlackRockUtils as bru
+    # emuNum, subjID, logTable = bru.get_next_log_entry()
+    # fileName = bru.make_EmuSaveName(emuNum, subjID, PARAMETERS.exp['name'])
+    # PARAMETERS.ID.update({'emuNum': emuNum,
+    #                    'name': subjID,
+    #                    'logTable': logTable,
+    #                    'fileName': fileName})
     import matlab.engine                                                        # import the matlab engine
     MATENG = matlab.engine.start_matlab()                                       # Fire up the matlab engine
     logEntry = MATENG.eval("getNextLogEntry();", nargout = 2)                   # Gather the log Entry for the patient

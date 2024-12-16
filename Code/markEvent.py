@@ -1,6 +1,8 @@
 import matlab
-
 import Code.globals as glb
+
+# if glb.PARAMETERS.ID.get('expEnv') == "BCM-EMU":
+#     import Code.BlackRockUtils as bru
 
 def markEvent(EventType: str, *args):
     """
@@ -80,13 +82,17 @@ def markEvent(EventType: str, *args):
     if glb.PARAMETERS.ID.get('expEnv') == "BCM-EMU":
         match EventType:
             case "taskStart":
+                # bru.task_comment('start', glb.PARAMETERS.ID['fileName'])
                 onlineNSP = glb.MATENG.eval("TaskComment('start', emuSaveName);", nargout=1)
                 glb.MATENG.workspace['onlineNSP'] = matlab.double(onlineNSP)
             case "taskStop":
+                # bru.task_comment('stop', glb.PARAMETERS.ID['fileName'])
                 glb.MATENG.eval("TaskComment('stop', emuSaveName);", nargout=0)
             case "taskAbort":
+                # bru.task_comment('kill', glb.PARAMETERS.ID['fileName'])
                 glb.MATENG.eval("TaskComment('kill', emuSaveName);", nargout=0)
             case _:
+                # bru.task_comment(eventName, glb.PARAMETERS.ID['fileName'])
                 blackRockComment = glb.MATENG.cellstr([eventName])
                 glb.MATENG.workspace['blackRockComment'] = blackRockComment
                 glb.MATENG.eval("blackRockComment = [blackRockComment{:}];", nargout=0)

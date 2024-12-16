@@ -13,7 +13,7 @@ prefs.hardware['audioLatencyMode'] = '3'
 class Parameters:
     def __init__(self):
         # Screen, text, and window configurations
-        self.screen = {'number': 1, 'fullscr': True}
+        self.screen = {'number': 0, 'fullscr': True}
         self.window = {'size': [1024, 768], 'bgColor': [90,90,90], 'units': 'norm'}
         
         self.text = {'font': 'Arial', 'size': 24, 'color': [255, 255, 255]}  # Simplified font to 'Arial'
